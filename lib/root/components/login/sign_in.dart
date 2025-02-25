@@ -1,4 +1,4 @@
-import 'package:eco_return/core/utilitis/icon_paths.dart';
+import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/login/signUp/sign_up.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
@@ -55,7 +55,7 @@ class _SignInScreenState extends State<SignInScreen> {
             TextField(
               style: GoogleFonts.montserrat(
                   fontSize: ThemeConstants.getDynamicFontSize(15),
-                  color: ThemeConstants.lightSubtitle,
+                  color: const Color.fromARGB(255, 0, 0, 0),
                   fontWeight: FontWeight.w500),
               obscureText: visibility,
               decoration: InputDecoration(
@@ -73,6 +73,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   onPressed: () => setState(() {
                     visibility = !visibility;
                   }),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: (){},
+                child: Text(
+                  "Forgot password?",
+                  style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.bold,
+                    color: ThemeConstants.ecoGreen,
+                  ),
                 ),
               ),
             ),

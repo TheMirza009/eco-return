@@ -17,8 +17,8 @@ class NameScreen extends StatefulWidget {
   State<NameScreen> createState() => _NameScreenState();
 }
 
-class _NameScreenState extends State<NameScreen>
-    with SingleTickerProviderStateMixin {
+class _NameScreenState extends State<NameScreen> with SingleTickerProviderStateMixin {
+  FocusNode focusNode = FocusNode();
   late AnimationController _controller;
   late Animation<double> _animation;
   File? _selectedImage;
@@ -27,6 +27,12 @@ class _NameScreenState extends State<NameScreen>
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(Duration(milliseconds: 700), () => focusNode.requestFocus());
+    });
+ 
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 40),
@@ -65,7 +71,6 @@ class _NameScreenState extends State<NameScreen>
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -152,7 +157,9 @@ class _NameScreenState extends State<NameScreen>
             ),
             SizedBox(height: (ThemeConstants.screenHeight * 3) / 100),
             TextField(
+              focusNode: focusNode,
               controller: controller,
+              keyboardType: TextInputType.name,
               onChanged: (value) => name = value,
               style: GoogleFonts.montserrat(
                 fontSize: ThemeConstants.getDynamicFontSize(15),

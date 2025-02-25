@@ -1,7 +1,7 @@
-import 'package:eco_return/core/utilitis/icon_paths.dart';
+import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
-import 'package:eco_return/core/utilitis/illustration_paths.dart';
-import 'package:eco_return/root/components/login/kyc/payment_method.dart';
+import 'package:eco_return/core/collections/illustration_paths.dart';
+import 'package:eco_return/root/components/login/kyc/payment_method_screen.dart';
 import 'package:eco_return/root/components/login/signUp/sign_up.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/cupertino.dart';

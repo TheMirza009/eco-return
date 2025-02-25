@@ -1,4 +1,4 @@
-import 'package:eco_return/core/utilitis/icon_paths.dart';
+import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/login/signUp/pin_screen.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';

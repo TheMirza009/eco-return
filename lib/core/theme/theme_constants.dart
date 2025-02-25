@@ -195,8 +195,8 @@ class ThemeConstants {
 
         inputDecorationTheme: 
            InputDecorationTheme(
-            labelStyle: GoogleFonts.montserrat(fontSize: getDynamicFontSize(15), color: lightSubtitle, fontWeight: FontWeight.w400),
-            floatingLabelStyle: GoogleFonts.montserrat(fontSize: getDynamicFontSize(20), color: lightSubtitle, fontWeight: FontWeight.w500),
+            labelStyle: GoogleFonts.montserrat(fontSize: getDynamicFontSize(15), color: lightSubtitle.withAlpha(99), fontWeight: FontWeight.w400),
+            floatingLabelStyle: GoogleFonts.montserrat(fontSize: getDynamicFontSize(20), color: lightSubtitle.withAlpha(200), fontWeight: FontWeight.w500),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24), // Rounded corners
               borderSide: BorderSide(color: lightBorder, width: fieldBorderWidth), // Grey border

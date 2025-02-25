@@ -11,11 +11,11 @@ class PinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Create a list of controllers for each OTP field
-    final List<TextEditingController> controllers =
-        List.generate(4, (index) => TextEditingController());
+    final List<TextEditingController> controllers = List.generate(4, (index) => TextEditingController());
 
     // ValueNotifier to track if all fields are filled
     final ValueNotifier<bool> isCompleteNotifier = ValueNotifier(false);
+    String? pin;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -75,6 +75,8 @@ class PinScreen extends StatelessWidget {
                             // Your verify logic here
                             Navigator.push(context, CupertinoPageRoute(builder: (_) => NameScreen()));
                             print("Verification Successful");
+                            pin = controllers.map((controller) => controller.text).join('');
+                            print("PIN: $pin");
                           }
                         : null,
                     child: Text(
