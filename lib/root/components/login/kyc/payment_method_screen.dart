@@ -4,6 +4,7 @@ import 'package:eco_return/core/collections/illustration_paths.dart';
 import 'package:eco_return/root/components/login/signUp/sign_up.dart';
 import 'package:eco_return/root/components/payment_methods/add_payment_method.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_list.dart';
+import 'package:eco_return/root/components/payment_methods/providers/payment_method_states.dart';
 import 'package:eco_return/root/data/models/payment_method_model.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,45 +20,61 @@ class PaymentMethodKYC extends StatefulWidget {
 }
 
 class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
-  String? paymentMethod;
-  List<PaymentMethod> paymentMethods = [];
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 22.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: (ThemeConstants.screenHeight * 8) / 100),
-            Text(
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: () => setState(() {
+            PaymentMethodStates.paymentMethods.clear();
+          }), icon: Icon(Icons.clear))
+        ],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: (ThemeConstants.screenHeight * 2) / 100),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
               "Payment methods!",
               style: textTheme.bodyLarge,
             ),
-            Text("\nPlease enter your preferred payment method(s) which you want to use for transactions."),
-            SizedBox(height: (ThemeConstants.screenHeight * 8) / 100),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 15),
+            child: Text(
+                "\nPlease enter your preferred payment method(s) which you want to use for transactions."),
+          ),
+          
+          SizedBox(height: (ThemeConstants.screenHeight * 5) / 100),
+          SizedBox(
+            height: ThemeConstants.screenHeight / 2.0,
+            child: PaymentMethodStates.paymentMethods.isEmpty 
+            ? Padding(
+              padding: const EdgeInsets.all(22.0),
               child: Image.asset(Illustrations.noPaymentMethod),
-            ),
-            SizedBox(height: (ThemeConstants.screenHeight * 7) / 100),
-            
-            Center(child: TextButton(
-              onPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => PaymentMethodList(paymentMethods: paymentMethods,))),
-              child: Text("Added payment methods: ${paymentMethods.length}", style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),))),
-            SizedBox(height: (ThemeConstants.screenHeight * 1.5) / 100),
-            Expanded(child: SizedBox(),),
-            ElevatedButton(
+            ) 
+            : PaymentMethodList(paymentMethods: PaymentMethodStates.paymentMethods),
+          ),
+          // SizedBox(height: (ThemeConstants.screenHeight * 7) / 100),
+          
+          
+          // SizedBox(height: (ThemeConstants.screenHeight * 1.5) / 100),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(children: [
+              ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context, 
                   CupertinoPageRoute(builder: (_) => AddPaymentMethodScreen(
                     onPaymentMethodAdded: (method) => 
                     setState(() {
-                    paymentMethods.add(method);
+                    PaymentMethodStates.paymentMethods.add(method);
                     }),
                   )));
               },
@@ -83,14 +100,14 @@ class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: ElevatedButton(
-                onPressed: paymentMethod == null
+                onPressed: PaymentMethodStates.paymentMethods.isNotEmpty
                     ? () => Navigator.push(
                           context, CupertinoPageRoute(builder: (_) => SignUpMain()))
                     : null,
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.resolveWith<Color>((states) => Colors.transparent ),
                   side: WidgetStateProperty.resolveWith<BorderSide?>((states) {
-                    if (paymentMethod == null) {
+                    if (PaymentMethodStates.paymentMethods.isEmpty) {
                       return const BorderSide(
                           color: Colors.grey, width: 1.5); // Grey border
                     }
@@ -103,8 +120,9 @@ class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
                 ),
               ),
             ),
-          ],
-        ),
+            ],),
+          )
+        ],
       ),
     );
   }

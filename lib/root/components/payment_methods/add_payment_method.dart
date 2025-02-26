@@ -33,10 +33,12 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
     final TextEditingController cvvController = TextEditingController();
     final List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
     final ValueNotifier<bool> isValid = ValueNotifier<bool>(false);
+    String errorText = "";
 
-void _updateValidationState() {
-  isValid.value = _formKey.currentState?.validate() ?? false;
-}
+  void _updateValidationState() {
+    isValid.value = (_formKey.currentState?.validate() ?? false) && selectedType != -1;
+  }
+
 
   @override
   void initState() {
@@ -251,6 +253,10 @@ void _updateValidationState() {
                   ),
                 ],
               ),
+                Text(
+                  errorText,
+                  style: TextStyle(color: Colors.red, fontSize: 14),
+                ),
               Expanded(child: SizedBox.shrink()),
               Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
@@ -258,27 +264,31 @@ void _updateValidationState() {
                   onPressed: () {
                     _updateValidationState();
 
-                    // Trigger form validation and display error messages
-                    if (_formKey.currentState?.validate() ?? false) {
+                    // Trigger form validation
+                    if (selectedType == -1) {
+                      // If no payment type is selected, show an error message
+                      setState(() {
+                        errorText = "Please select a payment type.";
+                      });
+                    } else if (_formKey.currentState?.validate() ?? false) {
+                      // Clear the error text if form is valid and payment type is selected
+                      setState(() {
+                        errorText = "";
+                      });
+
+                      // Create a new PaymentMethod and pass it to the callback
                       PaymentMethod newMethod = PaymentMethod(
                         name: nameController.text,
-                        cardNumber: cardNumberController.text.replaceAll(" ", ""),
+                        cardNumber:
+                            cardNumberController.text.replaceAll(" ", ""),
                         expiry: expiryController.text,
                         cvv: cvvController.text,
                         method: PaymentType(selectedType),
                       );
                       widget.onPaymentMethodAdded(newMethod);
 
-                      // ScaffoldMessenger.of(context).showSnackBar(
-                      //   SnackBar(content: Text("Form submitted successfully!")),
-                      // );
+                      // Navigate back or show a success message
                       Future.delayed(Duration(milliseconds: 500), () => Navigator.pop(context));
-                      
-                    } else {
-                      // Ensure complete gets updated for enabling/disabling the button
-                      setState(() {
-                        complete = false;
-                      });
                     }
                   },
                   style: ButtonStyle(

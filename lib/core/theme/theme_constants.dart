@@ -13,6 +13,12 @@ class ThemeConstants {
     return size * (screenWidth / 375); // 375 is a common base screen width (like an iPhone 8)
   }
 
+  static Color hexColor(String hex) {
+    // Ensure the hex string starts with "FF" for full opacity if it's not provided
+    String formattedHex = hex.length == 6 ? "FF$hex" : hex;
+    return Color(int.parse(formattedHex, radix: 16));
+  }
+
   static const greyDivider = Divider(color: ThemeConstants.dividerGrey);
   static TextStyle robotoMono = GoogleFonts.robotoMono(fontSize: 70);
 
@@ -71,6 +77,8 @@ class ThemeConstants {
   static const neutralred =  Color.fromARGB(255, 252, 87, 87);
   static const dividerGrey =  Color.fromARGB(69, 108, 119, 151);
   static const ecoGreen = Color(0xFF30b9b0);
+  static const ecoGrey = Color(0xff375a64);
+  static const meteorBrown = Color.fromARGB(255, 163, 95, 46);
 
   static final bodyMedium = GoogleFonts.montserrat(fontSize: getDynamicFontSize(14), color: lightSubtitle, fontWeight: FontWeight.w400);
   static final bodyNormal = GoogleFonts.montserrat(fontSize: getDynamicFontSize(20), color: lightSubtitle, fontWeight: FontWeight.w500);
