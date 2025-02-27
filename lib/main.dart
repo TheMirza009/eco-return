@@ -1,4 +1,6 @@
 import 'package:eco_return/core/theme/theme_constants.dart';
+import 'package:eco_return/root/components/home/bottom_nav_screen.dart';
+import 'package:eco_return/root/components/login/kyc/payment_method_screen_kyc.dart';
 import 'package:eco_return/root/components/login/sign_in.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Eco-Return',
       theme: ThemeConstants.lightTheme,
-      home: const SignInScreen(),
+      home: const HomeScreenBottomNav(),
+      // home: const SignInScreen(),
+      // home: const PaymentMethodKYC(),
     );
   }
 }

@@ -23,7 +23,7 @@ class BlankCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
           height: ThemeConstants.screenHeight / 2.5,
-          width: ThemeConstants.screenWidth / 1.9,
+          // width: ThemeConstants.screenWidth / 1.9,
           decoration: BoxDecoration(
             color: Colors.grey[200], // Light grey color for the container
             borderRadius: BorderRadius.circular(12),
@@ -37,13 +37,16 @@ class BlankCard extends StatelessWidget {
                 color: Colors.grey, // Matching the light grey color
               ),
               const SizedBox(height: 8), // Space between icon and text
-              Text(
-                "Add payment method",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Add payment method",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

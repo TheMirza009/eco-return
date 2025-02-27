@@ -1,7 +1,4 @@
 import 'package:eco_return/core/collections/card_styles.dart';
-import 'package:eco_return/core/collections/gradients.dart';
-import 'package:eco_return/core/collections/illustration_paths.dart';
-import 'package:eco_return/core/collections/logo_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/data/models/card_style.dart';
 import 'package:eco_return/root/data/models/payment_method_model.dart';
@@ -23,14 +20,14 @@ class BankCard extends StatelessWidget {
     final cardStylesMap = {
       0: CardStyles.darkBlue,
       1: CardStyles.lightWhite,
-      2: CardStyles.meteorBlack,
+      2: CardStyles.ecoGreen,
       3: CardStyles.amberRed,
       4: CardStyles.birchWood,
       5: CardStyles.blackMetal,
       6: CardStyles.violetBlue,
       7: CardStyles.violetRed,
       8: CardStyles.velvetBlue,
-      9: CardStyles.ecoGreen,
+      9: CardStyles.meteorBlack,
     };
 
     CardStyle cardStyle = cardStylesMap[number] ?? CardStyles.darkBlue;
@@ -48,16 +45,16 @@ class BankCard extends StatelessWidget {
             color: const Color.fromARGB(255, 21, 40, 49),
             borderRadius: BorderRadius.circular(12),
             gradient: RadialGradient(
-              center: number == 2  ? Alignment(0.6, 0.9)  : Alignment.topLeft, // Moves the gradient center to the top left
-              radius: number == 2 ? 3.0 : 2.5, // Adjust the radius as needed
+              center: number == 9  ? Alignment(0.6, 0.9)  : Alignment.topLeft, // Moves the gradient center to the top left
+              radius: number == 9 ? 3.0 : 2.5, // Adjust the radius as needed
               colors: cardStyle.gradient,
             ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color.fromARGB(255, 0, 0, 0).withAlpha(50), // White color with opacity for glow
-                  spreadRadius: 5, // How much the shadow spreads
-                  blurRadius: 10, // How blurred the shadow is
-                  offset: const Offset(0, 0), // Shadow position (x, y)
+                  color: const Color.fromARGB(255, 0, 0, 0).withAlpha(30), // White color with opacity for glow
+                  spreadRadius: 3, // How much the shadow spreads
+                  blurRadius: 8, // How blurred the shadow is
+                  offset: const Offset(4, 4), // Shadow position (x, y)
                 ),
               ]),
           child: Padding(

@@ -1,6 +1,9 @@
+import 'package:eco_return/core/collections/dummy_payment_methods.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/core/collections/illustration_paths.dart';
+import 'package:eco_return/root/components/home/bottom_nav_screen.dart';
+import 'package:eco_return/root/components/home/homescreen.dart';
 import 'package:eco_return/root/components/login/signUp/sign_up.dart';
 import 'package:eco_return/root/components/payment_methods/add_payment_method.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_list.dart';
@@ -12,14 +15,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class PaymentMethodKYC extends StatefulWidget {
-  const PaymentMethodKYC({super.key});
+class PaymentMethodScreen extends StatefulWidget {
+  const PaymentMethodScreen({super.key});
 
   @override
-  State<PaymentMethodKYC> createState() => _PaymentMethodKYCState();
+  State<PaymentMethodScreen> createState() => _PaymentMethodScreenState();
 }
 
-class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
+class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -27,9 +30,31 @@ class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         actions: [
-          IconButton(onPressed: () => setState(() {
-            PaymentMethodStates.paymentMethods.clear();
-          }), icon: Icon(Icons.clear))
+          IconButton(
+            icon: Icon(Icons.clear),
+            onPressed: () => setState(() {
+              PaymentMethodStates.paymentMethods.clear();
+            }),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: IconButton(
+              icon: EcoIcon(path: IconPaths.stroke_paymentMethod),
+              onPressed: () => setState(() {
+                print("Dummy methods added");
+                PaymentMethodStates.paymentMethods = dummyPaymentMethods
+                  .map((method) => PaymentMethod(
+                        name: method.name,
+                        cardNumber: method.cardNumber,
+                        expiry: method.expiry,
+                        cvv: method.cvv,
+                        method: method.method,
+                      ))
+                  .toList();
+                  print("Current Length: ${PaymentMethodStates.paymentMethods.length}");
+              }),
+            ),
+          ),
         ],
       ),
       body: Column(
@@ -65,7 +90,7 @@ class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
           // SizedBox(height: (ThemeConstants.screenHeight * 1.5) / 100),
           Spacer(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
             child: Column(children: [
               ElevatedButton(
               onPressed: () {
@@ -96,30 +121,7 @@ class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
                 ],
               ),
             ),
-            SizedBox(height: (ThemeConstants.screenHeight * 1.5) / 100),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: ElevatedButton(
-                onPressed: PaymentMethodStates.paymentMethods.isNotEmpty
-                    ? () => Navigator.push(
-                          context, CupertinoPageRoute(builder: (_) => SignUpMain()))
-                    : null,
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.resolveWith<Color>((states) => Colors.transparent ),
-                  side: WidgetStateProperty.resolveWith<BorderSide?>((states) {
-                    if (PaymentMethodStates.paymentMethods.isEmpty) {
-                      return const BorderSide(
-                          color: Colors.grey, width: 1.5); // Grey border
-                    }
-                    return null; // Default style
-                  }),
-                ),
-                child: Text(
-                  "Next",
-                  style: GoogleFonts.montserrat(fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
+            
             ],),
           )
         ],

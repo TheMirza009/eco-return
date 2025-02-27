@@ -279,8 +279,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
                       // Create a new PaymentMethod and pass it to the callback
                       PaymentMethod newMethod = PaymentMethod(
                         name: nameController.text,
-                        cardNumber:
-                            cardNumberController.text.replaceAll(" ", ""),
+                        cardNumber: cardNumberController.text.replaceAll(" ", ""),
                         expiry: expiryController.text,
                         cvv: cvvController.text,
                         method: PaymentType(selectedType),

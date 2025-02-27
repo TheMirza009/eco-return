@@ -20,8 +20,8 @@ class Gradients {
 
   static const List<Color> meteorBlack = [
     Color(0xFF0b2536),
-    // Color.fromARGB(255, 163, 95, 46),
      Color.fromARGB(255, 255, 149, 73),
+    // Color.fromARGB(255, 163, 95, 46),
   ];
 
   static const List<Color> amberRed = [
