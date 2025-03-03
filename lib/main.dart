@@ -1,7 +1,9 @@
+import 'package:double_back_to_close/double_back_to_close.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/home/bottom_nav_screen.dart';
 import 'package:eco_return/root/components/login/kyc/payment_method_screen_kyc.dart';
 import 'package:eco_return/root/components/login/sign_in.dart';
+import 'package:eco_return/root/widgets/exit_toast.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +19,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Eco-Return',
       theme: ThemeConstants.lightTheme,
-      home: const HomeScreenBottomNav(),
+      home: DoubleBack(
+          message: "",
+          background: Colors.transparent,
+          onFirstBackPress: (context) => showDialog(
+                context: context,
+                barrierColor: Colors.transparent,
+                barrierDismissible: false,
+                builder: (BuildContext context) =>  const ExitToast(),
+              ),
+          child: const HomeScreenBottomNav()),
       // home: const SignInScreen(),
       // home: const PaymentMethodKYC(),
     );

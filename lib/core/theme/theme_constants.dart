@@ -79,6 +79,7 @@ class ThemeConstants {
   static const ecoGreen = Color(0xFF30b9b0);
   static const ecoGrey = Color(0xff375a64);
   static const meteorBrown = Color.fromARGB(255, 163, 95, 46);
+  static const lightGrey =  const Color.fromARGB(255, 224, 224, 224);
 
   static final bodyMedium = GoogleFonts.montserrat(fontSize: getDynamicFontSize(14), color: lightSubtitle, fontWeight: FontWeight.w400);
   static final bodyNormal = GoogleFonts.montserrat(fontSize: getDynamicFontSize(20), color: lightSubtitle, fontWeight: FontWeight.w500);
@@ -234,6 +235,25 @@ class ThemeConstants {
                 side: BorderSide(color: ThemeConstants.ecoGreen, width: 3.5),
               ),
             ),
+          ),
+        ),
+
+        chipTheme: ChipThemeData(
+          backgroundColor: Colors.transparent,
+          selectedColor: ThemeConstants.ecoGreen.withOpacity(0.25),
+          disabledColor: Colors.grey[300],
+          checkmarkColor: ThemeConstants.ecoGreen,
+          labelStyle: const TextStyle(
+            color: Colors.grey,
+            fontWeight: FontWeight.normal,
+          ),
+          secondaryLabelStyle: TextStyle(
+            color: ThemeConstants.ecoGreen,
+            fontWeight: FontWeight.bold,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide( color:  const Color.fromARGB(255, 224, 224, 224), width: 3,),
           ),
         ),
 

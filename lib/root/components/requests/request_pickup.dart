@@ -1,6 +1,7 @@
 import 'package:eco_return/core/collections/illustration_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_screen.dart';
+import 'package:eco_return/root/components/requests/bottle_number.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +51,7 @@ class RequestPickup extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     CupertinoPageRoute(
-                      builder: (_) => PaymentMethodScreen(),
+                      builder: (_) => BottleNumberScreen(),
                     ),
                   ),
                   child: Text(

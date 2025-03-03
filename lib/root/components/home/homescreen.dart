@@ -4,6 +4,7 @@ import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_list.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_screen.dart';
 import 'package:eco_return/root/components/payment_methods/providers/payment_method_states.dart';
+import 'package:eco_return/root/components/requests/request_pickup.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:eco_return/root/widgets/menu_tile.dart';
 import 'package:eco_return/root/widgets/see_all_header.dart';
@@ -13,7 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Homescreen extends StatelessWidget {
-  const Homescreen({super.key});
+  final void Function()? onRequestTapped;
+  const Homescreen({super.key, this.onRequestTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class Homescreen extends StatelessWidget {
                     label: "Make a Request",
                     image: Illustrations.menuTile1,
                     width: ThemeConstants.screenWidth / 2.05,
-                    onTap: () => print("REQUEST"),
+                    onTap:  onRequestTapped ?? () => Future.delayed(Duration(milliseconds: 60), () => Navigator.push(context, CupertinoPageRoute(builder: (_) => RequestPickup()))),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 15.0),

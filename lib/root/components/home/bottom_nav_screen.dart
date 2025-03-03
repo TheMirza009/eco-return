@@ -1,7 +1,9 @@
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/home/homescreen.dart';
+import 'package:eco_return/root/components/profile/profile_screen.dart';
 import 'package:eco_return/root/components/requests/request_pickup.dart';
+import 'package:eco_return/root/components/transactions/transactions_screen.dart';
 import 'package:eco_return/root/widgets/eco_bottom_tabs.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,26 +20,43 @@ class HomeScreenBottomNav extends StatefulWidget {
 class _HomeScreenBottomNavState extends State<HomeScreenBottomNav> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const Homescreen(),
-    const RequestPickup(),
-    const TabScreen(title: "Transactions"),
-    const TabScreen(title: "Profile"),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          [
-            const Homescreen(),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 150), // Animation duration
+            transitionBuilder: (child, animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            child: [
+
+            /// Screens 
+            /// 1. Homescreen
+             Homescreen(
+              onRequestTapped: () async {
+                await Future.delayed(Duration(milliseconds: 80));
+                setState(() {
+                  _currentIndex = 1;
+                });
+              },
+            ),
+            /// 2. Pickup Request
             const RequestPickup(),
-            const TabScreen(title: "Transactions"),
-            const TabScreen(title: "Profile"),
+
+            /// 3. Transaction History
+            const TransactionsScreen(),
+
+            /// 4. Profile
+            const ProfileScreen(),
           ]
           [_currentIndex],
+          ),
           EcoBottomTabs(
             currentIndex: _currentIndex,
             onTap: (index) {

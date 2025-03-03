@@ -1,4 +1,7 @@
+import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
+import 'package:eco_return/root/data/enums/transaction_type.dart';
+import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -7,12 +10,14 @@ class TransactionTile extends StatelessWidget {
   final int bottles;
   final DateTime? time;
   final int amount;
+  final TransactionType transactionType; 
 
   const TransactionTile({
     super.key,
     required this.bottles,
     required this.amount,
     required this.time,
+    this.transactionType = TransactionType.receive,
   });
 
   String formatDateTime(DateTime? time) {
@@ -67,26 +72,39 @@ class TransactionTile extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
             child: Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween, // Ensure proper alignment
-              crossAxisAlignment:
-                  CrossAxisAlignment.start, // Align items to the top
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Ensure proper alignment
+              crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top
               children: [
-                Column(
+                
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "$bottles bottles",
-                      style: GoogleFonts.montserrat(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: ThemeConstants.screenWidth * 4.6 / 100,
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      formatDateTime(time),
-                      style: Theme.of(context).textTheme.bodyMedium,
+                    transactionType == TransactionType.receive
+                        ? Icon(Icons.call_received, color: ThemeConstants.ecoGreen)
+                        : Padding(
+                          padding: const EdgeInsets.only(right: 2.0, top: 5.0),
+                          child: EcoIcon(path: IconPaths.stroke_withdraw, size: ThemeConstants.screenWidth * 4.5 / 100),
+                        ),
+                    SizedBox(width: ThemeConstants.screenWidth * 1 / 100),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          transactionType == TransactionType.receive
+                              ? "$bottles bottles"
+                              : "Bank transfer",
+                          style: GoogleFonts.montserrat(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: ThemeConstants.screenWidth * 4.6 / 100,
+                          ),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          formatDateTime(time),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -9,6 +9,7 @@ import 'package:eco_return/root/components/payment_methods/add_payment_method.da
 import 'package:eco_return/root/components/payment_methods/payment_method_list.dart';
 import 'package:eco_return/root/components/payment_methods/providers/payment_method_states.dart';
 import 'package:eco_return/root/data/models/payment_method_model.dart';
+import 'package:eco_return/root/widgets/eco_bottom_tabs.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +130,7 @@ class _PaymentMethodKYCState extends State<PaymentMethodKYC> {
                         ? () => Navigator.pushAndRemoveUntil(
                               context,
                               // CupertinoPageRoute(builder: (_) => HomeScreenBottomNav()),
-                              CupertinoPageRoute(builder: (_) => Homescreen()),
+                              CupertinoPageRoute(builder: (_) => HomeScreenBottomNav()),
                               (route) => false,
                             )
                         : null,
