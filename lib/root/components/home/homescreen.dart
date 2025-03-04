@@ -21,6 +21,7 @@ class Homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      // appBar: AppBar(backgroundColor: Colors.transparent, toolbarHeight: 0,),
       body: ListView(
         children: [
           Padding(

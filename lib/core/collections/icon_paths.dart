@@ -26,6 +26,8 @@ class IconPaths {
   static const logout = "$path/logout.svg";
   static const next = "$path/next.svg";
   static const chevron = "$path/back.svg";
+  static const location = "$path/location.svg";
+  static const tick = "$path/tick.svg";
   
   // Strokes
   static const stroke_bottle = "$path/bottle_stroke.svg";

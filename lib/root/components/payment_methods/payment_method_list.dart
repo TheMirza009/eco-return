@@ -144,9 +144,10 @@ class _PaymentMethodListState extends State<PaymentMethodList> {
             child: SmoothPageIndicator(
               controller: _pageController, // Use the PageController
               count:  widget.paymentMethods.length, // Include BlankCard in the count
+              onDotClicked: (number) => _pageController.animateToPage(number, duration: Duration(milliseconds: 100), curve: Curves.bounceInOut),
               effect: ExpandingDotsEffect(
                 activeDotColor: indicatorColor,
-                dotColor: Colors.grey,
+                dotColor: ThemeConstants.lightBorder,
                 dotHeight: 6.5,
                 dotWidth: 20,
                 spacing: 8,
