@@ -24,8 +24,9 @@ class RequestPickup extends StatelessWidget {
                 Text(
                   "Request Pickup",
                   style: GoogleFonts.montserrat(
-                      fontSize: (ThemeConstants.screenHeight * 3) / 100,
-                      fontWeight: FontWeight.w500),
+                    fontSize: (ThemeConstants.screenHeight * 3) / 100,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 SizedBox(height: (ThemeConstants.screenHeight * 1) / 100),
                 Text(
@@ -47,8 +48,7 @@ class RequestPickup extends StatelessWidget {
                 ),
                 SizedBox(height: (ThemeConstants.screenHeight * 1) / 100),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: ThemeConstants.ecoGreen),
+                  style: ElevatedButton.styleFrom( backgroundColor: ThemeConstants.ecoGreen ),
                   onPressed: () => Navigator.push(
                     context,
                     CupertinoPageRoute(

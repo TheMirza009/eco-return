@@ -1,10 +1,13 @@
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/collections/illustration_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
+import 'package:eco_return/root/components/menu_screens/stats_screen.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_list.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_screen.dart';
 import 'package:eco_return/root/components/payment_methods/providers/payment_method_states.dart';
 import 'package:eco_return/root/components/requests/request_pickup.dart';
+import 'package:eco_return/root/components/transactions/transactions_screen.dart';
+import 'package:eco_return/root/components/menu_screens/wallet_screen.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:eco_return/root/widgets/menu_tile.dart';
 import 'package:eco_return/root/widgets/see_all_header.dart';
@@ -51,6 +54,7 @@ class Homescreen extends StatelessWidget {
                           label: "Wallet",
                           image: Illustrations.menuTile2,
                           width: ThemeConstants.screenWidth / 2.6,
+                          onTap: () => Future.delayed(Duration(milliseconds: 60), () => Navigator.push(context, CupertinoPageRoute(builder: (_) => WalletScreen()))),
                         ),
                         SizedBox(
                             height: (ThemeConstants.screenHeight * 1.55) / 100),
@@ -58,6 +62,7 @@ class Homescreen extends StatelessWidget {
                           label: "Stats",
                           image: Illustrations.menuTile3,
                           width: ThemeConstants.screenWidth / 2.6,
+                          onTap: () => Future.delayed(Duration(milliseconds: 60), () => Navigator.push(context, CupertinoPageRoute(builder: (_) => StatScreen()))),
                         ),
                       ],
                     ),
@@ -67,7 +72,7 @@ class Homescreen extends StatelessWidget {
               SizedBox(height: (ThemeConstants.screenHeight * 2) / 100),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                child: SeeAllHeader(label: "Transactions", onSeeAllPressed: (){})
+                child: SeeAllHeader(label: "Transactions", onSeeAllPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => TransactionsScreen())))
               ),
               SizedBox(
                 child: TransactionTile(

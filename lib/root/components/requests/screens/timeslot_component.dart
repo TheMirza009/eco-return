@@ -42,8 +42,7 @@ class TimeSlotComponent extends StatelessWidget {
               ),
             ),
             SizedBox(height: (ThemeConstants.screenHeight * 1) / 100),
-            Text(
-                "Our pickup agent will arrive for the pickup within the specified timeframe."),
+            Text( "Our pickup agent will arrive for the pickup within the specified timeframe."),
             SizedBox(height: (ThemeConstants.screenHeight * 3) / 100),
             DateDropdown(),
 

@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 class BankCard extends StatelessWidget {
   final PaymentMethod card;
   final int number;
+  final void Function()? onCardTapped;
   const BankCard({
     super.key, 
     required this.card, 
     this.number = 0,
+    this.onCardTapped,
     });
 
   @override
@@ -35,7 +37,7 @@ class BankCard extends StatelessWidget {
     final logo = "Assets/icons/logos/${card.method.name}${cardStyle.extension}";
     String last4digits = card.cardNumber.substring(card.cardNumber.length - 4);
     return GestureDetector(
-      onTap: () => print(logo),
+      onTap: onCardTapped,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
         child: Container(

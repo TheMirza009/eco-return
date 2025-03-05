@@ -19,12 +19,14 @@ class PickupInfoScreen extends StatefulWidget {
 
   @override
   _PickupInfoScreenState createState() => _PickupInfoScreenState();
+  
 }
 
 class _PickupInfoScreenState extends State<PickupInfoScreen> {
   final PageController _pageController = PageController();
   bool canPop = false;
   int _currentIndex = 0;
+  late int currentPage;
 
   // Screens
   final List<Widget> screens = [
@@ -38,6 +40,7 @@ class _PickupInfoScreenState extends State<PickupInfoScreen> {
     if (_currentIndex < screens.length - 1) {
       setState(() {
         _currentIndex++;
+        currentPage = _currentIndex + 1; // Update AnimatedArc page value
       });
       _pageController.animateToPage(
         _currentIndex,
@@ -54,25 +57,37 @@ class _PickupInfoScreenState extends State<PickupInfoScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    currentPage = _currentIndex; // Start AnimatedArc with _currentIndex
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) {
+        setState(() {
+          currentPage = _currentIndex + 1; // Update to _currentIndex + 1
+        });
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: canPop,
+      canPop: _currentIndex == 0, // Allow pop only when the index is zero
       onPopInvokedWithResult: (bool didPop, dynamic result) {
         if (_currentIndex > 0) {
-          print("CUSTOM POP");
+          // Decrement the index and update the page view
           setState(() {
             _currentIndex--;
+            currentPage = _currentIndex + 1; // Update AnimatedArc page value
           });
           _pageController.animateToPage(
             _currentIndex,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut,
           );
-        } else {
-          // Optionally handle the scenario where there are no more pages to go back to
-          print("No more pages to go back to");
-          Navigator.pop(context);
-          canPop = true;
+        } else if (didPop) {
+          // Optional: handle the actual pop if it occurred
+          print("Page popped");
         }
       },
       child: Scaffold(
@@ -95,6 +110,7 @@ class _PickupInfoScreenState extends State<PickupInfoScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0),
               child: AnimatedArc(
+                page: currentPage, // Bind to currentPage for animation
                 onPressed: _navigateToNextPage,
                 size: ThemeConstants.screenHeight * 8 / 100,
               ),

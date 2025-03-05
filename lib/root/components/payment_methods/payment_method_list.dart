@@ -12,7 +12,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PaymentMethodList extends StatefulWidget {
   final List<PaymentMethod> paymentMethods;
-  const PaymentMethodList({super.key, required this.paymentMethods});
+  final void Function(PaymentMethod card)? onCardTapped;
+  const PaymentMethodList({super.key, required this.paymentMethods, this.onCardTapped});
 
   @override
   State<PaymentMethodList> createState() => _PaymentMethodListState();
@@ -129,7 +130,10 @@ class _PaymentMethodListState extends State<PaymentMethodList> {
               return BankCard(
                 card: widget.paymentMethods[index],
                 number: index,
-              );
+                onCardTapped: widget.onCardTapped != null
+                          ? () =>  widget.onCardTapped!(widget.paymentMethods[index])
+                          : null,
+                    );
             },
           ),
         ),

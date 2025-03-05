@@ -69,9 +69,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16.0, right: 15),
+            padding: const EdgeInsets.only(left: 16.0, right: 15, top: 5),
             child: Text(
-                "\nPlease enter your preferred payment method(s) which you want to use for transactions."),
+                "Please enter your preferred payment method(s) which you want to use for transactions."),
           ),
           
           SizedBox(height: (ThemeConstants.screenHeight * 5) / 100),

@@ -1,17 +1,19 @@
 import 'dart:math';
 
+import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/collections/illustration_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/payment_methods/payment_method_screen.dart';
 import 'package:eco_return/root/data/enums/transaction_type.dart';
+import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:eco_return/root/widgets/transaction_chip.dart';
 import 'package:eco_return/root/widgets/transaction_tile.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransactionsScreen extends StatefulWidget {
-  const TransactionsScreen({super.key});
+  final TransactionType? typeFilter;
+  const TransactionsScreen({super.key, this.typeFilter});
 
   @override
   State<TransactionsScreen> createState() => _TransactionsScreenState();
@@ -32,6 +34,12 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
       };
     });
 
+  @override
+  void initState() {
+    super.initState();
+    selectedType = widget.typeFilter; // Assign the passed filter or null directly
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +53,20 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+          },
+          icon: EcoIcon(
+            path: IconPaths.chevron,
+            color:  Navigator.canPop(context) ? Colors.black : Colors.transparent,
+          ),
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,7 +76,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+                SizedBox(height: MediaQuery.of(context).size.height * 8.5 / 100),
                 Text(
                   "Transaction history",
                   style: GoogleFonts.montserrat(

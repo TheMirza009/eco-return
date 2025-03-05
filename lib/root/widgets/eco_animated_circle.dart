@@ -26,60 +26,47 @@ class AnimatedArc extends StatefulWidget {
 class _AnimatedArcState extends State<AnimatedArc> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
-  int _parameter = 0;
 
   @override
   void initState() {
     super.initState();
-    _parameter = widget.page;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    _updateAnimation();
-
-    // Using async/await in _onTap (so we remove the listener here)
+    _updateAnimation(widget.page, widget.page); // Initialize to the current page's angle
   }
 
-  // Define the angle steps: index 0 = 0, 1 = π/2, 2 = π, 3 = 3π/2, 4 = 2π.
-  // _parameter indicates which step we are in:
-  // 1: animate from 0 to π/2 (quarter circle)
-  // 2: animate from π/2 to π (half circle)
-  // 3: animate from π to 3π/2 (three-quarters)
-  // 4: animate from 3π/2 to 2π (full circle)
+  @override
+  void didUpdateWidget(covariant AnimatedArc oldWidget) {
+    super.didUpdateWidget(oldWidget);
 
-  void _updateAnimation() {
-  final List<double> angleSteps = [
-    0.0,
-    math.pi / 2,
-    math.pi,
-    math.pi * 1.5,
-    math.pi * 2
-  ];
-
-  _animation = Tween<double>(
-    begin: _parameter == 0 ? angleSteps[_parameter] : angleSteps[_parameter - 1],
-    end: angleSteps[_parameter],
-  ).animate(
-    CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ),
-  );
-}
-
-Future<void> _onTap() async {
-  if (_parameter < 4) {
-    // Update state so that the new tween (with the proper begin and end) is set up
-    setState(() {
-      _parameter++;
-      _updateAnimation();
-    });
-    // Now start the animation using the new tween
-    await _controller.forward(from: 0.0);
+    if (widget.page != oldWidget.page) {
+      _updateAnimation(oldWidget.page, widget.page); // Update animation based on new and old values
+      _controller.forward(from: 0.0);
+    }
   }
-}
 
+  void _updateAnimation(int startPage, int endPage) {
+    final List<double> angleSteps = [
+      0.0,
+      math.pi / 2,
+      math.pi,
+      math.pi * 1.5,
+      math.pi * 2,
+    ];
+
+    // Define the animation with start and end values
+    _animation = Tween<double>(
+      begin: angleSteps[startPage],
+      end: angleSteps[endPage],
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeInOut,
+      ),
+    );
+  }
 
   @override
   void dispose() {
@@ -91,10 +78,10 @@ Future<void> _onTap() async {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _onTap();
-        widget.onPressed!();
-        // Navigator.push(context, CupertinoPageRoute(builder: (_) => widget.navigateTo));
-        },
+        if (widget.onPressed != null) {
+          widget.onPressed!();
+        }
+      },
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -111,6 +98,7 @@ Future<void> _onTap() async {
     );
   }
 }
+
 
 class ArcPainter extends CustomPainter {
   final Animation<double> animation;

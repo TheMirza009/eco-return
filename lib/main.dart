@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
                 context: context,
                 barrierColor: Colors.transparent,
                 barrierDismissible: false,
-                builder: (BuildContext context) =>  const ExitToast(),
+                builder: (BuildContext context) => const ExitToast(),
               ),
           child: const HomeScreenBottomNav()),
       // home: const SignInScreen(),

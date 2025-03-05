@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddPaymentMethodScreen extends StatefulWidget {
-  final void Function(PaymentMethod alarm) onPaymentMethodAdded;
+  final void Function(PaymentMethod method) onPaymentMethodAdded;
   const AddPaymentMethodScreen({super.key, required this.onPaymentMethodAdded});
 
   @override
