@@ -3,6 +3,7 @@ import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SeeAllHeader extends StatelessWidget {
   final String label;
@@ -29,7 +30,7 @@ class SeeAllHeader extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "See all",
+                  AppLocalizations.of(context)!.seeAll,
                   style: GoogleFonts.montserrat(
                     fontWeight: FontWeight.bold,
                     color: ThemeConstants.ecoGreen,

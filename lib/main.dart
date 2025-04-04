@@ -38,7 +38,7 @@ class MyApp extends ConsumerWidget {
         title: 'Eco-Return',
         theme: ThemeConstants.lightTheme,
         locale: locale,
-        supportedLocales: Languages.supportedLocales,
+        supportedLocales: LocaleController.supportedLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         // localizationsDelegates: const [
         //   AppLocalizations.delegate, // Generated localization delegate

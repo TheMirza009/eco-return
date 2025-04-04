@@ -1,3 +1,4 @@
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/requests/bottle_number/pickup_info_screen.dart';
@@ -8,6 +9,7 @@ import 'package:eco_return/root/widgets/eco_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 
@@ -23,6 +25,9 @@ class _PickupSummaryComponentState extends State<PickupSummaryComponent> {
 
   @override
   Widget build(BuildContext context) {
+
+    AppLocalizations locale = LocaleController.getLocale(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(

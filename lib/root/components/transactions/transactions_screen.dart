@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/collections/illustration_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
@@ -10,6 +11,8 @@ import 'package:eco_return/root/widgets/transaction_chip.dart';
 import 'package:eco_return/root/widgets/transaction_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TransactionsScreen extends StatefulWidget {
   final TransactionType? typeFilter;
@@ -43,6 +46,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    // Localization
+    AppLocalizations locale = LocaleController.getLocale(context);
 
     // Filter transactions based on the selected type
     final filteredTransactions = selectedType == null
@@ -78,7 +84,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height * 8.5 / 100),
                 Text(
-                  "Transaction history",
+                  locale.transactionHistory,
                   style: GoogleFonts.montserrat(
                     fontSize: MediaQuery.of(context).size.height * 0.03,
                     fontWeight: FontWeight.w500,
@@ -86,21 +92,21 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 Text(
-                  "This is a detailed list of all your transactions available in our records.",
+                  locale.transactionListDetails,
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TransactionChip(
-                      label: "All",
+                      label: locale.all,
                       isSelected: selectedType == null,
                       onSelected: () => setState(() => selectedType = null),
                     ),
                     SizedBox(
                         width: ThemeConstants.screenWidth * 2 / 100), // Spacing
                     TransactionChip(
-                      label: "Withdrawals",
+                      label: locale.withdrawals,
                       isSelected: selectedType == TransactionType.withdraw,
                       onSelected: () => setState(
                           () => selectedType = TransactionType.withdraw),
@@ -108,7 +114,7 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
                     SizedBox(
                         width: ThemeConstants.screenWidth * 2 / 100), // Spacing
                     TransactionChip(
-                      label: "Received",
+                      label: locale.received,
                       isSelected: selectedType == TransactionType.receive,
                       onSelected: () => setState(
                           () => selectedType = TransactionType.receive),

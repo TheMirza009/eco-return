@@ -1,3 +1,4 @@
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/menu_screens/withdraw_screens/choose_bank_screen.dart';
@@ -11,12 +12,15 @@ import 'package:eco_return/root/widgets/wallet_widgets/money_plate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class WalletScreen extends StatelessWidget {
   const WalletScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations locale = LocaleController.getLocale(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: () => Navigator.pop(context), icon: EcoIcon(path: IconPaths.chevron, color: Colors.black)),
@@ -32,7 +36,7 @@ class WalletScreen extends StatelessWidget {
               children: [
                 SizedBox(height: ThemeConstants.screenHeight * 8 / 100),
                 Text(
-                  "Account Wallet",
+                  locale.accountWallet,
                   style: GoogleFonts.montserrat(
                     fontSize: MediaQuery.of(context).size.height * 0.03,
                     fontWeight: FontWeight.w500,
@@ -40,7 +44,7 @@ class WalletScreen extends StatelessWidget {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 Text(
-                  "This is the current amount available for withdrawal along with your history.",
+                  locale.walletInfo,
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                 MoneyPlate(
@@ -50,7 +54,7 @@ class WalletScreen extends StatelessWidget {
                 ),
                 Padding(
                     padding:const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                    child: SeeAllHeader(label: "Withdrawals", onSeeAllPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => TransactionsScreen(typeFilter: TransactionType.withdraw,))))),
+                    child: SeeAllHeader(label: locale.withdrawals, onSeeAllPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => TransactionsScreen(typeFilter: TransactionType.withdraw,))))),
                 SizedBox(
                   child: TransactionTile(
                     bottles: 10,
@@ -85,7 +89,7 @@ class WalletScreen extends StatelessWidget {
                   Expanded(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("Withdraw",  style: GoogleFonts.montserrat(fontWeight: FontWeight.w500)), // Centered text
+                      child: Text(locale.withdraw,  style: GoogleFonts.montserrat(fontWeight: FontWeight.w500)), // Centered text
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/requests/bottle_number/pickup_info_screen.dart';
@@ -10,12 +11,14 @@ import 'package:eco_return/root/widgets/transaction_chip.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TimeSlotComponent extends StatelessWidget {
   const TimeSlotComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations locale = LocaleController.getLocale(context);
     final ValueNotifier<int> timeslot = ValueNotifier(0);
     final List<String> dummyTimeslots = [
       "9:00 AM - 11:00 AM",
@@ -35,14 +38,14 @@ class TimeSlotComponent extends StatelessWidget {
           children: [
             SizedBox(height: (ThemeConstants.screenHeight * 0) / 100),
             Text(
-              "Pick a Timeslot",
+              locale.pickTimeslot,
               style: GoogleFonts.montserrat(
                 fontSize: (ThemeConstants.screenHeight * 3) / 100,
                 fontWeight: FontWeight.w500,
               ),
             ),
             SizedBox(height: (ThemeConstants.screenHeight * 1) / 100),
-            Text( "Our pickup agent will arrive for the pickup within the specified timeframe."),
+            Text( locale.timeslotInfo),
             SizedBox(height: (ThemeConstants.screenHeight * 3) / 100),
             DateDropdown(),
 
@@ -52,7 +55,7 @@ class TimeSlotComponent extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Pick one of the timeslots \navailable to our pickup agents.",
+                  locale.pickTimeslotPrompt,
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                     fontSize: (ThemeConstants.screenHeight * 1.3) / 100,

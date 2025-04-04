@@ -12,7 +12,7 @@ class LocaleSelectorPopup extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Get the current locale from the Riverpod provider
     final localeNotifier = ref.read(localeProvider.notifier);
-    final supportedLocales = Languages.supportedLocales; // Access directly
+    final supportedLocales = LocaleController.supportedLocales; // Access directly
 
     return PopupMenuTheme(
       data: PopupMenuThemeData(
@@ -36,7 +36,7 @@ class LocaleSelectorPopup extends ConsumerWidget {
                     shape: RoundedRectangle(3),
                   ),
                   SizedBox(width: ThemeConstants.screenHeight * 1 / 100),
-                  Text(Languages.getLanguageName(locale.languageCode)),
+                  Text(LocaleController.getLanguageName(locale.languageCode)),
                 ],
               ),
             );

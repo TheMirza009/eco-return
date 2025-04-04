@@ -1,3 +1,4 @@
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
@@ -79,7 +80,7 @@ class _DatePickerTileState extends State<DatePickerTile> {
                 EcoIcon(path: IconPaths.cake), // Leading icon
                 SizedBox(width: 16), // Spacing
                 Text(
-                  "Date of Birth",
+                  LocaleController.getLocale(context).dateOfBirth,
                   style: GoogleFonts.montserrat(
                       fontSize: ThemeConstants.getDynamicFontSize(15),
                       color: ThemeConstants.lightSubtitle,

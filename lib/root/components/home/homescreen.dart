@@ -1,3 +1,4 @@
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/collections/illustration_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
@@ -15,6 +16,7 @@ import 'package:eco_return/root/widgets/transaction_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Homescreen extends StatelessWidget {
   final void Function()? onRequestTapped;
@@ -22,7 +24,11 @@ class Homescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+     // Locale for translations
+    AppLocalizations locale = LocaleController.getLocale(context);
     final TextTheme textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       // appBar: AppBar(backgroundColor: Colors.transparent, toolbarHeight: 0,),
       body: ListView(
@@ -41,7 +47,7 @@ class Homescreen extends StatelessWidget {
               Row(
                 children: [
                   MenuTile(
-                    label: "Make a Request",
+                    label: locale.makeARequest,
                     image: Illustrations.menuTile1,
                     width: ThemeConstants.screenWidth / 2.05,
                     onTap:  onRequestTapped ?? () => Future.delayed(Duration(milliseconds: 60), () => Navigator.push(context, CupertinoPageRoute(builder: (_) => RequestPickup()))),
@@ -51,7 +57,7 @@ class Homescreen extends StatelessWidget {
                     child: Column(
                       children: [
                         MenuTile(
-                          label: "Wallet",
+                          label: locale.wallet,
                           image: Illustrations.menuTile2,
                           width: ThemeConstants.screenWidth / 2.6,
                           onTap: () => Future.delayed(Duration(milliseconds: 60), () => Navigator.push(context, CupertinoPageRoute(builder: (_) => WalletScreen()))),
@@ -59,7 +65,7 @@ class Homescreen extends StatelessWidget {
                         SizedBox(
                             height: (ThemeConstants.screenHeight * 1.55) / 100),
                         MenuTile(
-                          label: "Stats",
+                          label: locale.stats,
                           image: Illustrations.menuTile3,
                           width: ThemeConstants.screenWidth / 2.6,
                           onTap: () => Future.delayed(Duration(milliseconds: 60), () => Navigator.push(context, CupertinoPageRoute(builder: (_) => StatScreen()))),
@@ -72,7 +78,7 @@ class Homescreen extends StatelessWidget {
               SizedBox(height: (ThemeConstants.screenHeight * 2) / 100),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                child: SeeAllHeader(label: "Transactions", onSeeAllPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => TransactionsScreen())))
+                child: SeeAllHeader(label: locale.transactions, onSeeAllPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => TransactionsScreen())))
               ),
               SizedBox(
                 child: TransactionTile(
@@ -84,7 +90,7 @@ class Homescreen extends StatelessWidget {
               SizedBox(height: (ThemeConstants.screenHeight * 1) / 100),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
-                child: SeeAllHeader(label: "Payment method", onSeeAllPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => PaymentMethodScreen())))
+                child: SeeAllHeader(label: locale.paymentMethod, onSeeAllPressed: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => PaymentMethodScreen())))
               ),
               PaymentMethodList(paymentMethods: PaymentMethodStates.paymentMethods),
             SizedBox(height: ThemeConstants.screenHeight / 4,),

@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
@@ -24,7 +25,7 @@ class LocationScreen extends StatelessWidget {
           children: [
             SizedBox(height: (ThemeConstants.screenHeight * 8) / 100),
             Text(
-              "Location Sharing",
+              LocaleController.getLocale(context).locationSharing,
               style: GoogleFonts.montserrat(
                   fontSize: (ThemeConstants.screenHeight * 3) / 100,
                   fontWeight: FontWeight.w500),
@@ -39,7 +40,7 @@ class LocationScreen extends StatelessWidget {
                   EcoIcon(path: IconPaths.stroke_location),
                   SizedBox(width: ThemeConstants.screenWidth * 3 / 100),
                   Text(
-                    "Live location",
+                    LocaleController.getLocale(context).liveLocation,
                     style: GoogleFonts.montserrat(fontWeight: FontWeight.w700),
                   ),
                 ],

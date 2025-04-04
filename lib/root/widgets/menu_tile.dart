@@ -57,12 +57,15 @@ class _MenuTileState extends State<MenuTile> {
               Positioned(
                 top: ThemeConstants.screenHeight * 1.5 / 100,
                 left: ThemeConstants.screenHeight * 1.8 / 100,
-                child: Text(
-                  widget.label!,
-                  style: GoogleFonts.montserrat(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w500,
-                    fontSize:  ThemeConstants.screenWidth * 4.6 / 100,
+                child: SizedBox(
+                  width: widget.width * 90 / 100,
+                  child: Text(
+                    widget.label!,
+                    style: GoogleFonts.montserrat(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w500,
+                      fontSize:  ThemeConstants.screenWidth * 4.6 / 100,
+                    ),
                   ),
                 ),
               ),

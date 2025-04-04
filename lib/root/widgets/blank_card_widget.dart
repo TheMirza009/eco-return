@@ -1,8 +1,11 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/payment_methods/add_payment_method.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class BlankCard extends StatelessWidget {
   final Function()? onTap;
@@ -10,6 +13,8 @@ class BlankCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    AppLocalizations locale = LocaleController.getLocale(context);
     return Padding(
     padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 8),
     child: DottedBorder(
@@ -40,7 +45,7 @@ class BlankCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Add payment method",
+                  locale.addPaymentMethod,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20,

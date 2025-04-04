@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/home/homescreen.dart';
@@ -14,9 +15,10 @@ import 'package:eco_return/root/widgets/payment_method_tile.dart';
 import 'package:eco_return/root/widgets/profile_photo_widget.dart';
 import 'package:eco_return/root/widgets/section_label.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -27,12 +29,15 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   File? _selectedImage;
-   String primaryMethod = PaymentMethodStates.paymentMethods.isNotEmpty
+  String primaryMethod = PaymentMethodStates.paymentMethods.isNotEmpty
       ? "****${PaymentMethodStates.paymentMethods[0].cardNumber.substring(PaymentMethodStates.paymentMethods[0].cardNumber.length - 4)}"
       : "None"; // Fallback value if the list is empty
 
   @override
   Widget build(BuildContext context) {
+    // Locale for translations
+    AppLocalizations locale = LocaleController.getLocale(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -59,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(height: ThemeConstants.screenHeight * 4 / 100),
               Transform.translate(
                 offset: Offset(-22, 0),
-                child: SectionLabel(label: "Profile"),
+                child: SectionLabel(label: locale.profile),
               ),
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
 
@@ -67,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               EcoTextField(
                 iconPath: IconPaths.smile,
                 initialValue: "Josh",
-                label: "Name",
+                label: locale.name,
                 onChanged: (text) {},
               ),
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
@@ -76,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               EcoTextField(
                 iconPath: IconPaths.email,
                 initialValue: "",
-                label: "Email",
+                label: locale.email,
                 onChanged: (text) {},
               ),
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
@@ -85,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               EcoTextField(
                 iconPath: IconPaths.phone,
                 initialValue: "",
-                label: "Phone",
+                label: locale.phone,
                 onChanged: (text) {},
               ),
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
@@ -94,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               EcoTextField(
                 iconPath: IconPaths.home,
                 initialValue: "",
-                label: "Address",
+                label: locale.address,
                 onChanged: (text) {},
               ),
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
@@ -121,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               // ),
               EcoListTile(
                 ecoIconPath: IconPaths.paymentMethod,
-                title: "Payment method",
+                title: locale.paymentMethod,
                 backgroundColor: Colors.transparent,
                 borderColor: ThemeConstants.lightBorder,
                 borderWidth: 2,
@@ -132,32 +137,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontWeight: FontWeight.w300,
                   ),
                 ),
-                onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => PaymentMethodScreen())),
+                onTap: () => Navigator.push(context,
+                    CupertinoPageRoute(builder: (_) => PaymentMethodScreen())),
               ),
 
               SizedBox(height: ThemeConstants.screenHeight * 4 / 100),
               Transform.translate(
                 offset: Offset(-22, 0),
-                child: SectionLabel(label: "Settings"),
+                child: SectionLabel(label: locale.settings),
               ),
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
               EcoListTile(
                 ecoIconPath: IconPaths.smile,
-                title: "Language",
+                title: locale.language,
                 trailingWidget: Text(
-                  "English",
+                  LocaleController.getLanguageName(
+                      Localizations.localeOf(context).languageCode),
                   style: GoogleFonts.montserrat(
                     color: const Color.fromARGB(255, 19, 33, 43),
                   ),
                 ),
-                onTap: () => Navigator.push(context, CupertinoPageRoute(builder: (_) => LanguageSelectionScreen())),
+                onTap: () => Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                        builder: (_) => LanguageSelectionScreen())),
               ),
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
               EcoListTile(
                 ecoIconPath: IconPaths.clock,
-                title: "Notifications",
+                title: locale.notifications,
                 trailingWidget: Text(
-                  "On",
+                  locale.on,
                   style: GoogleFonts.montserrat(
                     color: const Color.fromARGB(255, 19, 33, 43),
                   ),
@@ -166,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
               EcoListTile(
                 ecoIconPath: IconPaths.logout,
-                title: "Logout",
+                title: locale.logout,
                 onTap: () => showLogoutDialog(context),
               ),
               SizedBox(height: ThemeConstants.screenHeight / 4),
@@ -182,13 +192,17 @@ void showLogoutDialog(BuildContext context) {
   showCupertinoDialog(
     context: context,
     builder: (BuildContext context) {
+      // Locale for translations
+      AppLocalizations locale = LocaleController.getLocale(context);
+
+      // Dialogue
       return CupertinoAlertDialog(
         title: Text(
-          "Logout",
+          locale.logout,
           style: GoogleFonts.montserrat(),
         ),
         content: Text(
-          "Are you sure you want to Logout?",
+          locale.sureLogout,
           style: GoogleFonts.montserrat(),
         ),
         actions: [
@@ -197,7 +211,7 @@ void showLogoutDialog(BuildContext context) {
               Navigator.of(context).pop(); // Dismiss the dialog
             },
             child: Text(
-              "Cancel",
+              locale.cancel,
               style: GoogleFonts.montserrat(
                   fontSize: ThemeConstants.screenHeight * 1.7 / 100),
             ),
@@ -214,7 +228,7 @@ void showLogoutDialog(BuildContext context) {
               print("User logged out");
             },
             isDestructiveAction: true, // Highlights the button in red
-            child: Text("Logout",
+            child: Text(locale.logout,
                 style: GoogleFonts.montserrat(
                     fontSize: ThemeConstants.screenHeight * 1.7 / 100)),
           ),

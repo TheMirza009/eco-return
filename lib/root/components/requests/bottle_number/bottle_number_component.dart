@@ -1,3 +1,4 @@
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/widgets/eco_animated_circle.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wheel_slider/wheel_slider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:math' as math;
 
 class BottleNumberComponent extends StatelessWidget {
@@ -14,9 +16,13 @@ class BottleNumberComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+     // Locale for translations
+    AppLocalizations locale = LocaleController.getLocale(context);
     final totalCount = 100;
     final initValue = 10;
     final ValueNotifier<int> bottlesNotifier = ValueNotifier<int>(1);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Stack(
@@ -70,7 +76,7 @@ class BottleNumberComponent extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Number of bottles",
+                  locale.numberOfBottles,
                   style: GoogleFonts.montserrat(
                     fontSize: (ThemeConstants.screenHeight * 3) / 100,
                     fontWeight: FontWeight.w500,
@@ -108,7 +114,7 @@ class BottleNumberComponent extends StatelessWidget {
                   Transform.translate(
                     offset: Offset(0, -20),
                     child: Text(
-                      "bottles",
+                      locale.bottles,
                       style: GoogleFonts.montserrat(
                         fontSize: ThemeConstants.screenHeight * 4 / 100,
                       ),
@@ -138,7 +144,7 @@ class BottleNumberComponent extends StatelessWidget {
               ),
               SizedBox(height: ThemeConstants.screenHeight * 5.5 / 100 ,),
               Text(
-                "Move the slider to\nchange the number",
+                locale.moveSliderToChange,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserrat(
                   fontSize: (ThemeConstants.screenHeight * 1.5) / 100,

@@ -7,6 +7,7 @@ import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LanguageSelectionScreen extends ConsumerWidget {
   const LanguageSelectionScreen({super.key});
@@ -29,7 +30,7 @@ class LanguageSelectionScreen extends ConsumerWidget {
           children: [
             SizedBox(height: ThemeConstants.screenHeight * 8.5 / 100),
             Text(
-              "Language",
+              AppLocalizations.of(context)!.language,
               style: GoogleFonts.montserrat(
                 fontSize: ThemeConstants.screenHeight * 0.03,
                 fontWeight: FontWeight.w500,
@@ -54,7 +55,7 @@ class LanguageSelectionScreen extends ConsumerWidget {
                 duration: const Duration(milliseconds: 300), // Fade animation duration
                 child: ListView(
                   key: ValueKey<String>(languageCode), // Ensures that the ListView rebuilds on language change
-                  children: Languages.supportedLocales.map((locale) {
+                  children: LocaleController.supportedLocales.map((locale) {
                     bool isSelected = locale.languageCode == languageCode;
                     return Column(
                       children: [
@@ -74,7 +75,7 @@ class LanguageSelectionScreen extends ConsumerWidget {
                             shape: RoundedRectangle(3),
                           ),
                           title: Text(
-                            Languages.getLanguageName(locale.languageCode),
+                            LocaleController.getLanguageName(locale.languageCode),
                             style: GoogleFonts.montserrat(
                               color: const Color.fromARGB(255, 14, 25, 32),
                               fontWeight: FontWeight.w500,

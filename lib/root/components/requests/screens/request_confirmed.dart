@@ -1,3 +1,4 @@
+import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/collections/illustration_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
@@ -7,12 +8,14 @@ import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RequestConfirmedScreen extends StatelessWidget {
   const RequestConfirmedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AppLocalizations locale = LocaleController.getLocale(context);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -22,14 +25,14 @@ class RequestConfirmedScreen extends StatelessWidget {
             children: [
               SizedBox(height: ThemeConstants.screenHeight * 5 / 100,),
               Text(
-                "Request confirmed!",
+                locale.requestConfirmed,
                 style: GoogleFonts.montserrat(
                   fontSize: ThemeConstants.screenHeight * 3.5 / 100,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
-                "Our Pickup agent is on his way!",
+                locale.pickupOnTheWay,
                 style: GoogleFonts.montserrat(
                   fontSize: ThemeConstants.screenHeight * 1.5 / 100,
                   fontWeight: FontWeight.w400,
