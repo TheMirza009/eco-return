@@ -1,5 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:eco_return/core/base/controllers/languages.dart';
+import 'package:eco_return/core/base/controllers/locale_controller.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/payment_methods/add_payment_method.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,5 +1,5 @@
 
-import 'package:eco_return/core/base/controllers/languages.dart';
+import 'package:eco_return/core/base/controllers/locale_controller.dart';
 import 'package:eco_return/core/collections/gradients.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';

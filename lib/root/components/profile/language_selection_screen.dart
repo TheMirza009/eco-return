@@ -1,6 +1,6 @@
 import 'package:country_flags/country_flags.dart';
-import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/base/controllers/locale_controller.dart';
+import 'package:eco_return/core/base/controllers/locale_provider.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
@@ -37,24 +37,26 @@ class LanguageSelectionScreen extends ConsumerWidget {
               ),
             ),
             SizedBox(height: ThemeConstants.screenHeight * 0.01),
-            Row(
-              children: [
-                Text("Current Locale: $languageCode"),
-                SizedBox(width: ThemeConstants.screenWidth * 2 / 100),
-                CountryFlag.fromLanguageCode(
-                  languageCode,
-                  height: ThemeConstants.screenHeight * 2 / 100,
-                  width: ThemeConstants.screenHeight * 3 / 100,
-                  shape: RoundedRectangle(3),
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Text("Current Locale: $languageCode"),
+            //     SizedBox(width: ThemeConstants.screenWidth * 2 / 100),
+            //     CountryFlag.fromLanguageCode(
+            //       languageCode,
+            //       height: ThemeConstants.screenHeight * 2 / 100,
+            //       width: ThemeConstants.screenHeight * 3 / 100,
+            //       shape: RoundedRectangle(3),
+            //     ),
+            //   ],
+            // ),
             SizedBox(height: ThemeConstants.screenHeight * 2 / 100),
             Expanded(
               child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300), // Fade animation duration
+                duration: const Duration(
+                    milliseconds: 300), // Fade animation duration
                 child: ListView(
-                  key: ValueKey<String>(languageCode), // Ensures that the ListView rebuilds on language change
+                  key: ValueKey<String>(
+                      languageCode), // Ensures that the ListView rebuilds on language change
                   children: LocaleController.supportedLocales.map((locale) {
                     bool isSelected = locale.languageCode == languageCode;
                     return Column(
@@ -63,7 +65,9 @@ class LanguageSelectionScreen extends ConsumerWidget {
                           tileColor: Colors.transparent,
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
-                              color: isSelected ? ThemeConstants.ecoGreen : ThemeConstants.lightBorder,
+                              color: isSelected
+                                  ? ThemeConstants.ecoGreen
+                                  : ThemeConstants.lightBorder,
                               width: isSelected ? 3 : 2,
                             ),
                             borderRadius: BorderRadius.circular(25),
@@ -74,8 +78,7 @@ class LanguageSelectionScreen extends ConsumerWidget {
                             width: ThemeConstants.screenHeight * 3 / 100,
                             shape: RoundedRectangle(3),
                           ),
-                          title: Text(
-                            LocaleController.getLanguageName(locale.languageCode),
+                          title: Text(LocaleController.getLanguageName(locale.languageCode),
                             style: GoogleFonts.montserrat(
                               color: const Color.fromARGB(255, 14, 25, 32),
                               fontWeight: FontWeight.w500,
@@ -86,7 +89,8 @@ class LanguageSelectionScreen extends ConsumerWidget {
                             ref.read(localeProvider.notifier).setLocale(locale);
                           },
                         ),
-                        SizedBox(height: ThemeConstants.screenHeight * 1.6 / 100),
+                        SizedBox(
+                            height: ThemeConstants.screenHeight * 1.6 / 100),
                       ],
                     );
                   }).toList(),

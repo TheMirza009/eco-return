@@ -1,17 +1,36 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter/material.dart';
+import 'package:eco_return/core/collections/language_code.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'dart:ui';
 
-/// StateNotifier to manage the current locale
-class LocaleNotifier extends StateNotifier<Locale> {
-  LocaleNotifier() : super(const Locale('en')); // Default to English
+class LocaleController {
 
-  /// Change locale dynamically
-  void setLocale(Locale newLocale) {
-    state = newLocale;
+  // Constructor
+  // LocaleHelper();
+
+  // Get current language name based on context
+  static String getCurrentLanguageName(BuildContext context) {
+    String languageCode = Localizations.localeOf(context).languageCode;
+    return LanguageCode.getName(languageCode).name; // Get name from LanguageCode class
   }
-}
 
-/// Riverpod provider for localization state
-final localeProvider = StateNotifierProvider<LocaleNotifier, Locale>((ref) {
-  return LocaleNotifier();
-});
+  // Get language name from language code
+  static String getLanguageName(String? languageCode) {
+    // Default to 'en' if no language code is provided
+    String code = languageCode ?? 'en';
+    return LanguageCode.getName(code).name; // Get name from LanguageCode class
+  }
+
+  // Method to get localized strings (requires context)
+  static AppLocalizations getLocale(BuildContext context) {
+    return AppLocalizations.of(context)!;
+  }
+
+  // List of supported locales
+  static const List<Locale> supportedLocales = [
+    Locale('en'), // English
+    Locale('hu'), // Hungarian
+    Locale('de'), // German
+    Locale('fr'), // French
+  ];
+}

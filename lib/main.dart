@@ -1,6 +1,7 @@
 import 'package:double_back_to_close/double_back_to_close.dart';
-import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/base/controllers/locale_controller.dart';
+import 'package:eco_return/core/base/controllers/locale_provider.dart';
+import 'package:eco_return/core/base/controllers/shared_pref_controller.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/home/bottom_nav_screen.dart';
 import 'package:eco_return/root/components/home/locale_test.dart';
@@ -17,10 +18,22 @@ void main() {
   runApp(ProviderScope(child: const MyApp()));
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    SharedPrefController.loadUserData(ref);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ThemeConstants.screenWidth = MediaQuery.sizeOf(context).width;
     ThemeConstants.screenHeight = MediaQuery.sizeOf(context).height;
 
@@ -35,30 +48,30 @@ class MyApp extends ConsumerWidget {
     final locale = ref.watch(localeProvider); // Watch locale changes
 
     return MaterialApp(
-        title: 'Eco-Return',
-        theme: ThemeConstants.lightTheme,
-        locale: locale,
-        supportedLocales: LocaleController.supportedLocales,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        // localizationsDelegates: const [
-        //   AppLocalizations.delegate, // Generated localization delegate
-        //   GlobalMaterialLocalizations.delegate,
-        //   GlobalWidgetsLocalizations.delegate,
-        //   GlobalCupertinoLocalizations.delegate,
-        // ],
-        home: DoubleBack(
-            message: "",
-            background: Colors.transparent,
-            onFirstBackPress: (context) => showDialog(
-                  context: context,
-                  barrierColor: Colors.transparent,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) => const ExitToast(),
-                ),
-            child: const HomeScreenBottomNav()),
-        // const HomeScreenBottomNav()),
-        // home: const SignInScreen(),
-        // home: const PaymentMethodKYC(),
-        );
+      title: 'Eco-Return',
+      theme: ThemeConstants.lightTheme,
+      locale: locale,
+      supportedLocales: LocaleController.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      // localizationsDelegates: const [
+      //   AppLocalizations.delegate, // Generated localization delegate
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      // ],
+      home: DoubleBack(
+          message: "",
+          background: Colors.transparent,
+          onFirstBackPress: (context) => showDialog(
+                context: context,
+                barrierColor: Colors.transparent,
+                barrierDismissible: false,
+                builder: (BuildContext context) => const ExitToast(),
+              ),
+          child: const HomeScreenBottomNav()),
+      // const HomeScreenBottomNav()),
+      // home: const SignInScreen(),
+      // home: const PaymentMethodKYC(),
+    );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:country_flags/country_flags.dart';
-import 'package:eco_return/core/base/controllers/languages.dart';
 import 'package:eco_return/core/base/controllers/locale_controller.dart';
+import 'package:eco_return/core/base/controllers/locale_provider.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

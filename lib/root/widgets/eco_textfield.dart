@@ -10,6 +10,7 @@ class EcoTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final ValueChanged<String> onChanged;
   final FocusNode? focusNode;
+  final TextEditingController? textController;
 
   const EcoTextField({
     Key? key,
@@ -19,11 +20,12 @@ class EcoTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     required this.onChanged,
     this.focusNode,
+    this.textController
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController controller = TextEditingController(text: initialValue);
+    final TextEditingController controller = textController ?? TextEditingController(text: initialValue);
 
     return TextField(
       focusNode: focusNode,

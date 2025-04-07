@@ -5,6 +5,9 @@ import 'package:eco_return/root/widgets/eco_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:eco_return/core/base/controllers/locale_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class TransactionTile extends StatelessWidget {
   final int bottles;
@@ -63,6 +66,8 @@ class TransactionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    AppLocalizations locale = LocaleController.getLocale(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
       child: ClipRRect(
@@ -91,8 +96,8 @@ class TransactionTile extends StatelessWidget {
                       children: [
                         Text(
                           transactionType == TransactionType.receive
-                              ? "$bottles bottles"
-                              : "Bank transfer",
+                              ? "$bottles ${locale.bottles}"
+                              : locale.bankTransfer,
                           style: GoogleFonts.montserrat(
                             color: Theme.of(context).colorScheme.primary,
                             fontWeight: FontWeight.bold,

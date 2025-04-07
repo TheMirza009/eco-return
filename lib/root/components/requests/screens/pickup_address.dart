@@ -1,4 +1,4 @@
-import 'package:eco_return/core/base/controllers/languages.dart';
+import 'package:eco_return/core/base/controllers/locale_controller.dart';
 import 'package:eco_return/core/collections/icon_paths.dart';
 import 'package:eco_return/core/theme/theme_constants.dart';
 import 'package:eco_return/root/components/requests/bottle_number/pickup_info_screen.dart';
